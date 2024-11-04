@@ -1,19 +1,25 @@
-#ifndef CDN_NODE_H
-#define CDN_NODE_H
+#ifndef CDNNODE_H
+#define CDNNODE_H
 
 #include <string>
+#include "SkipList.hpp"
 
-using namespace std; // Using namespace std
+class CDNNode {
+private:
+    double x, y;  // Coordinates of the CDN node
+    SkipList popularMovies;
 
-// Class representing a CDN node
-class CDN_Node {
 public:
-    double x; // X coordinate
-    double y; // Y coordinate
-    string data; // Placeholder for data associated with the node
+    // Constructor
+    CDNNode(double x, double y, int skipListMaxLevel = 4, float skipListProbability = 0.5f);
 
-    // Constructor to initialize the CDN node
-    CDN_Node(double x, double y, const string& data);
+    // Getters
+    double getX() const;
+    double getY() const;
+
+    // Movie management
+    void storePopularMovie(Movie* movie);      // Stores a popular movie in the CDNNode
+    Movie* fetchMovie(const std::string& movieName);  // Fetches a movie if it's popular
 };
 
-#endif // CDN_NODE_H
+#endif // CDNNODE_H
