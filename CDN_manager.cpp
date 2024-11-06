@@ -18,6 +18,15 @@ CDNManager::~CDNManager() {
         delete node;
     }
 }
+std::string getKeyFromValue(const std::unordered_map<std::string, CDNNode*>& map, const CDNNode* node) {
+    for (const auto& pair : map) {
+        if (pair.second == node) {
+            return pair.first;  // return the key if the value matches
+        }
+    }
+    std::string t;
+    return t;
+}
 
 // Adds a new CDN node at the specified (x, y) coordinates and initializes with random popular movies
 void CDNManager::addCDNNode(double x, double y) {
@@ -36,8 +45,10 @@ void CDNManager::addMovieToMainServer(const std::string& movieName, std::string 
 // Marks a movie as popular and stores it in all CDN nodes
 void CDNManager::markMovieAsPopular(const std::string& movieName , CDNNode*& node) {
     Movie* movie = mainServer.getMovie(movieName);
+    std::cout << movie <<std::endl;
     if (movie) {
         std::vector<std::string> movie_names = node->get_movie_names();
+        std::cout<<movie_names[0] <<std::endl;
         std::vector<std::pair<int, std::string>> freqs;
         std::string r = getKeyFromValue(cdnNodes, node) + "_" + movieName;
 
@@ -73,14 +84,6 @@ void CDNManager::initializeCDNNodeWithPopularMovies(CDNNode* cdnNode, int numMov
     }
 }
 
-std::string getKeyFromValue(const std::unordered_map<std::string, CDNNode*>& map, const CDNNode* node) {
-    for (const auto& pair : map) {
-        if (pair.second == node) {
-            return pair.first;  // return the key if the value matches
-        }
-    }
-
-}
 // Helper function to find all CDN nodes within a specified radius using a min-heap
 std::priority_queue<std::pair<CDNNode*,double>, std::vector<std::pair<CDNNode*,double>>, DistanceComparator>
 CDNManager::findCDNNodesInRadius(double userX, double userY, double radius) {
@@ -111,20 +114,10 @@ Movie* CDNManager::requestMovie(const std::string& movieName, double userX, doub
         if (movie) {
             std::string requestKey = getKeyFromValue(cdnNodes, node) + "_" + movieName;
             requestCount[requestKey]++;
+            std::cout<< requestCount[requestKey] << std::endl;
             std::cout<< "Movie found in server at location"<<node->getX()<<" "<<node->getY()<<" in "<<0.001*nodesInRange.top().second<<std::endl;
             return movie;  // Return if found in CDN node
         }
-
-        // Increment request count for the movie in this node
-        // // If request count exceeds threshold, add movie to this CDN node
-        // if (requestCount[requestKey] >= requestThreshold) {
-        //     movie = mainServer.getMovie(movieName);
-        //     if (movie) {
-        //         node->storePopularMovie(movie);
-        //         requestCount[requestKey] = 0;  // Reset request count after adding
-        //         return movie;
-        //     }
-        // }
     }
 
     // If not found in any CDN node, retrieve from the main server
@@ -133,7 +126,8 @@ Movie* CDNManager::requestMovie(const std::string& movieName, double userX, doub
         CDNNode* node = nir.top().first;  // Closest node
         std::string requestKey = getKeyFromValue(cdnNodes, node) + "_" + movieName;
         requestCount[requestKey]++;
-
+        std::cout<<requestKey<<" "<< requestCount[requestKey] <<std::endl;
+        std::cout << movieName << std::endl;
         markMovieAsPopular(movieName, node);
 
         std::cout<<"Movie found in main server"<<std::endl;
@@ -144,6 +138,7 @@ Movie* CDNManager::requestMovie(const std::string& movieName, double userX, doub
         std::cout<<"Movie Not Found"<<std::endl;
         return nullptr;
     }
+    return nullptr;
 }
 
 

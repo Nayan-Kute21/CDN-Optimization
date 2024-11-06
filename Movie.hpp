@@ -5,11 +5,12 @@
 
 class Movie {
 private:
-    std::string name;   // movie name
     std::string image_path;  // path of movie poster
+    std::string name;   // movie name
 
 public:
     // Constructor
+    Movie();
     Movie(const std::string& name, std::string path);
 
     // Getters

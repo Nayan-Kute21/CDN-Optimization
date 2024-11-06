@@ -1,0 +1,45 @@
+# Ignore build artifacts
+*.o
+*.obj
+*.so
+*.a
+*.lib
+*.dll
+*.exe
+*.out
+
+# Ignore build directories
+/build/
+/bin/
+/Debug/
+/Release/
+/dist/
+/.venv/
+
+# Ignore CMake build files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Ignore Visual Studio/Visual Studio Code files
+*.vcxproj
+*.vcxproj.*
+*.sln
+.vscode/
+
+# Ignore CLion files
+.idea/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore backup files
+*.log
+*.tmp
+*.swp
+*~
+
+# Ignore personal configuration files
+*.user

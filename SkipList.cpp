@@ -123,8 +123,17 @@ int SkipList::getsize()
 {
     return count;
 }
-std::vector<std::string> SkipList::getAllNames()
-{
-    std::vector<std::string> vec;
-    return vec;
+std::vector<std::string> SkipList::getAllNames() {
+    std::vector<std::string> names;
+    SkipListNode* current = header->forward[0];  // Start from the first node at level 0
+
+    // Traverse the entire level 0 to collect movie names
+    while (current != nullptr) {
+        if (current->movie != nullptr) {  // Ensure there is a movie associated with the node
+            names.push_back(current->movie->name);
+        }
+        current = current->forward[0];
+    }
+
+    return names;
 }

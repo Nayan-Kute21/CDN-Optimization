@@ -30,9 +30,9 @@ struct DistanceComparator {
 
 class CDNManager {
 private:
-    MainServer mainServer;
     std::unordered_map<std::string, CDNNode*> cdnNodes; // Stores all CDN nodes
     std::unordered_map<std::string, int> requestCount;  // Stores request count for each movie per CDN node
+    MainServer mainServer;
 
     // Helper functions
     std::priority_queue<std::pair<CDNNode*, double>, std::vector<std::pair<CDNNode*, double>>, DistanceComparator> findCDNNodesInRadius(double userX, double userY, double radius); // Modified function

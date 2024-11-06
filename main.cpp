@@ -8,16 +8,18 @@ int main() {
     CDNManager manager;
 
     // Path to the directory containing movie images
-    std::string movieDirectoryPath = "path/to/your/movie_images";
+    std::string movieDirectoryPath = "./assests";
 
     // Reading all movie images from the directory and adding them to the main server
     for (const auto& entry : fs::directory_iterator(movieDirectoryPath)) {
         if (entry.is_regular_file()) {
             std::string movieName = entry.path().stem().string();  // Extract movie name from file name
             std::string imagePath = entry.path().string();          // Full path to the image file
+            // std::cout << movieName  << " "<< imagePath << std::endl; 
             manager.addMovieToMainServer(movieName, imagePath);
         }
     }
+
 
     // Add CDN nodes at specific locations
     manager.addCDNNode(10.0, 10.0);
@@ -25,7 +27,7 @@ int main() {
     manager.addCDNNode(100.0, 100.0);
 
     // User requests a movie
-    std::string requestedMovie = "MovieName"; // Replace with the movie name you want to request
+    std::string requestedMovie = "Screenshot (3)"; // Replace with the movie name you want to request
     double userX = 20.0;                      // User's x-coordinate
     double userY = 20.0;                      // User's y-coordinate
     double searchRadius = 30.0;               // Search radius for nearby CDN nodes

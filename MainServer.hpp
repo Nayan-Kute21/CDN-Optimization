@@ -8,7 +8,7 @@
 
 class MainServer {
 private:
-    std::unordered_map<std::string, Movie> movieLibrary;
+    std::unordered_map<std::string, Movie*> movieLibrary;
 
 public:
     // Movie management

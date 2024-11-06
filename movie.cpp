@@ -1,5 +1,8 @@
 #include "Movie.hpp"
 
+Movie::Movie()
+{
+}
 // Constructor to initialize a Movie object with a name and a poster image path
 Movie::Movie(const std::string& name, std::string path)
     : name(name), image_path(path) {}

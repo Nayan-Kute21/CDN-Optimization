@@ -17,12 +17,8 @@ double CDNNode::getY() const {
 
 // Stores a popular movie in the CDN node's skip list
 void CDNNode::storePopularMovie(Movie* movie) {
-    if (!isFull()) {
         popularMovies.insert(movie);
-        std::cout << "Stored popular movie: " << movie->getName() << " in CDN node (" << x << ", " << y << ")\n";
-    } else {
-        std::cout << "CDN node (" << x << ", " << y << ") skip list is full. Cannot store more movies.\n";
-    }
+        // std::cout << "Stored popular movie: " << movie->getName() << " in CDN node (" << x << ", " << y << ")\n";
 }
 
 // Fetches a movie if it's in the CDN node's popular movie list
