@@ -20,6 +20,10 @@ public:
     // Movie management
     void storePopularMovie(Movie* movie);      // Stores a popular movie in the CDNNode
     Movie* fetchMovie(const std::string& movieName);  // Fetches a movie if it's popular
+    std::vector<std::string> get_movie_names ();
+    bool isFull(); // returns boolean about skip List is full or not
+    void remove_mov(const std::string& moviename);
+
 };
 
 #endif // CDNNODE_H

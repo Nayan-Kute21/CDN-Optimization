@@ -19,6 +19,7 @@ public:
 class SkipList {
 private:
     int maxLevel;
+    int count;
     float probability;
     SkipListNode* header;
     std::mt19937 gen;
@@ -33,9 +34,11 @@ public:
     ~SkipList();
 
     // SkipList operations
-    void insert(Movie* movie);
+    void insert(Movie* movie); //upone very insert count will be increased
     Movie* search(const std::string& movieName);
     void remove(const std::string& movieName);
+    int getsize();
+    std::vector<std::string>getAllNames();
 };
 
 #endif // SKIPLIST_H
